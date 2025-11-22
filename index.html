@@ -1,1 +1,112 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Dennis Wapperom</title>
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                background: #0a0a0a;
+                color: #0ff;
+                font-family: "Courier New", monospace;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            h1 {
+                margin: 0;
+                font-size: 3rem;
+                font-weight: 400;
+                text-shadow: 0 0 4px #0ff, 0 0 12px #0ff;
+            }
+
+            .glitch-text {
+                position: relative;
+                font-size: 1.4rem;
+                margin-top: 0.6rem;
+                color: #0ff;
+                letter-spacing: 0.5px;
+            }
+
+            .glitch-text::before,
+            .glitch-text::after {
+                content: attr(data-text);
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+            }
+
+            .glitch-text::before {
+                color: #f0f;
+                animation: glitchTop 2s infinite linear alternate-reverse;
+            }
+
+            .glitch-text::after {
+                color: #0f0;
+                animation: glitchBot 2s infinite linear alternate-reverse;
+            }
+
+            @keyframes glitchTop {
+                0% { clip: rect(0, 9999px, 0, 0); transform: translate(0, 0); }
+                10% { clip: rect(0, 9999px, 6px, 0); transform: translate(-2px, -2px); }
+                20% { clip: rect(0, 9999px, 12px, 0); transform: translate(2px, 1px); }
+                30% { clip: rect(0, 9999px, 8px, 0); transform: translate(-1px, 2px); }
+                40% { clip: rect(0, 9999px, 4px, 0); transform: translate(1px, -1px); }
+                100% { clip: rect(0, 9999px, 9999px, 0); transform: translate(0); }
+            }
+
+            @keyframes glitchBot {
+                0% { clip: rect(0, 0, 0, 0); transform: translate(0, 0); }
+                10% { clip: rect(12px, 9999px, 20px, 0); transform: translate(2px, 1px); }
+                20% { clip: rect(4px, 9999px, 14px, 0); transform: translate(-2px, -1px); }
+                30% { clip: rect(18px, 9999px, 30px, 0); transform: translate(1px, -2px); }
+                40% { clip: rect(8px, 9999px, 18px, 0); transform: translate(-1px, 1px); }
+                100% { clip: rect(0, 9999px, 9999px, 0); transform: translate(0); }
+            }
+
+            a {
+                color: #0ff;
+                text-decoration: none;
+                margin-top: 1.3rem;
+                font-size: 1rem;
+                border-bottom: 1px dotted #0ff;
+
+                &:hover {
+                    color: #fff;
+                    border-bottom: 1px solid #fff;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Dennis Wapperom</h1>
+        <div class="glitch-text" id="role" data-text="Software Developer">Software Developer</div>
+
+        <a href="https://github.com/dvandervlag" target="_blank">github</a>
+
+        <script>
+            const roles = [
+            "Software Developer",
+            "UI/UX Engineer",
+            "Happy Guy"
+            ];
+
+            const roleEl = document.getElementById("role");
+            let idx = 0;
+
+            setInterval(() => {
+                idx = (idx + 1) % roles.length;
+                roleEl.setAttribute("data-text", roles[idx]);
+                roleEl.textContent = roles[idx];
+            }, 3000);
+        </script>
+    </body>
+</html>
